@@ -1,15 +1,30 @@
+package Bank;
+
+import User.User;
+
 public class BankAccount {
+
+    //Variables
     private User owner;
     private Currency currency;
     private double balance;
     private double interestRate;
     private double creditLimit;
-    BankAccount(User owner, Currency currency, double balance, double interestRate, double creditLimit) {
+
+    //Functions
+    public BankAccount(User owner, Currency currency, double balance, double interestRate, double creditLimit) {
         this.owner = owner;
         this.currency = currency;
         this.balance = balance;
         this.interestRate = interestRate;
         this.creditLimit = creditLimit;
+    }
+    public void performTransaction(double amount) {
+        if (amount > 0) {
+            deposit(amount);
+        } else {
+            withdraw(amount);
+        }
     }
     public void deposit(double amount) {
         balance += amount;
@@ -31,8 +46,8 @@ public class BankAccount {
         this.creditLimit = creditLimit;
     }
 
-    public void convertBalance(Currency newCurrency) {
-        double newBalance = balance * currency.getExchangeRate() / newCurrency.getExchangeRate();
+    public void convertBalance(Currency newCurrency, double amount) {
+        double newBalance = currency.convert(amount, currency, newCurrency);
         balance = newBalance;
         currency = newCurrency;
     }

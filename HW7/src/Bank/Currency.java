@@ -1,8 +1,10 @@
+package Bank;
+
 public class Currency {
     private String code;
     private double exchangeRate;
 
-    Currency(String code, double exchangeRate){
+    public Currency(String code, double exchangeRate){
         this.code=code;
         this.exchangeRate=exchangeRate;
     }
@@ -13,5 +15,9 @@ public class Currency {
 
     public double getExchangeRate() {
         return exchangeRate;
+    }
+
+    public double convert(double amount, Currency from, Currency to){
+        return amount * to.getExchangeRate() / from.getExchangeRate();
     }
 }
